@@ -1,0 +1,49 @@
+
+.sub {
+	width: 100px;
+	background-color: red;
+	float:left;
+	margin-left:-100%;
+	position:relative;
+	left:-100px;	
+}
+
+.extra {
+	width:100px;
+	background-color: blue;
+	float:left;
+	margin-left: -100px;
+	position:relative;
+	right:-100px;
+	
+}
+
+.main {
+	background-color: yellow;
+	float:left;
+	width:100%;
+}
+
+#first {
+	padding: 0 100px 0 100px;
+}
+
+
+.leftSecond {
+	width:100px;
+	background-color: red;
+	float:left;
+}
+
+.rightSecond {
+	width:100px;
+	background-color: blue;
+	float:right;
+}
+
+.mainSecond {
+	background-color: yellow;
+
+}
+
+

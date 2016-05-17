@@ -1,0 +1,11 @@
+div {
+	background-color: blue;
+	width: 200px;
+	height: 150px;
+	margin: 20px;
+	float:left;
+}
+
+body {
+	background-color: red;
+}

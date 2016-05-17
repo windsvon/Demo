@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>barCharts</title>
+	<style>
+	 body {
+	 	font-size: 0;
+	 }
+
+	 div {
+	 	margin-bottom: 30px;
+	 }
+
+	</style>
+</head>
+<body>
+	<div id="bar-charts">
+	    <canvas id="canvas1" width="100" height="400"></canvas>	
+	    <canvas id="canvas2" width="100" height="400"></canvas>	
+	    <canvas id="canvas3" width="100" height="400"></canvas>	
+	    <canvas id="canvas4" width="100" height="400"></canvas>	
+    </div>
+
+    <div id="arc-charts">
+	    <canvas id="canvas5" width="200" height="200"></canvas>	
+	    <canvas id="canvas6" width="200" height="200"></canvas>	
+	    <canvas id="canvas7" width="200" height="200"></canvas>	
+    </div>
+
+    <script type="text/javascript">
+//绘制条形统计图
+    createBar("canvas1", "HTML", 0.9, "#2D425D");
+    createBar("canvas2", "CSS", 0.8, "#B93853");
+    createBar("canvas3", "JavaScript", 0.75, "#2D425D");
+    createBar("canvas4", "JQuery", 0.7, "#B93853");
+
+//绘制弧线统计图
+    createArc("canvas5", "HTML", 0.9);
+    createArc("canvas6", "CSS", 0.8);
+    createArc("canvas7", "JavaScript", 0.75);
+
+    function createBar(canvasID, name, percent, color) {
+    	var canvas = document.getElementById(canvasID);
+		var barColor = 'black';
+		var barWidth = canvas.width / 2.2;
+		var barHeight = 0;
+		var fullHeight = canvas.height * 0.8
+		var lineWidth = canvas.width / 50;
+	    var context = canvas.getContext("2d");
+		var x = canvas.width / 2;
+		var y = canvas.height * 0.9;
+		var currentHeight = y;
+		var end = percent * fullHeight;
+
+
+	    // Draw Static Content
+	    context.beginPath();
+	    context.moveTo(0.15 * canvas.width, y);
+	    context.lineTo(0.85 * canvas.width, y);
+	 	context.font = x / 4 + "px" + " Arial";
+	 	context.textAlign = "center";
+	 	context.fillStyle = "#666"
+		context.fillText(name, x, y * 1.05);
+	  	context.strokeStyle = "#666";
+	    context.lineWidth = lineWidth - 3;
+	    context.lineCap = "round";
+	    context.stroke();
+
+		var interval = setInterval(drawBar, 5);
+
+
+		function drawBar() { 
+
+		    currentHeight = currentHeight - 2;
+		    barHeight = y - currentHeight;
+		    
+		    context.beginPath();
+		    context.fillStyle = color;
+		    context.fillRect(x - barWidth / 2, currentHeight, barWidth, barHeight);
+		    context.stroke();
+
+
+		    if (barHeight > end) {
+		    	clearInterval(interval);
+		    }
+
+		}
+	}
+
+    function createArc(canvasID, name, percent) {
+    	var canvas = document.getElementById(canvasID);
+		var currentEndAngle = 0;
+		var currentStartAngle = 0;
+		var currentColor = 'black';
+		var lineRadius = canvas.width / 2.2;
+		var lineWidth = canvas.width / 50;
+	    var context = canvas.getContext("2d");
+		var x = canvas.width / 2;
+		var y = canvas.height / 2;
+		var end = percent*2;
+
+	    // Draw Static Circle
+	   	context.arc(x, y, lineRadius - lineRadius * 0.1, 0, 2 * Math.PI);
+	    context.strokeStyle = "green";
+	    context.lineWidth = lineWidth - 2;
+	    context.stroke();
+
+
+	    // Draw Static Content
+	    context.beginPath();
+	    context.moveTo(0.15 * canvas.width, y);
+	    context.lineTo(0.85 * canvas.width, y);
+	 	context.font = x / 5 + "px" + " Arial";
+	 	context.textAlign = "center";
+		context.fillText(name, x, y * 0.9);
+	    context.strokeStyle = "red";
+	    context.lineWidth = lineWidth - 3;
+	    context.lineCap = "round";
+	    context.stroke();
+
+		var interval = setInterval(drawArc, 5);
+
+
+		function drawArc() { 
+
+		    var startAngle = currentStartAngle * Math.PI;
+		    var endAngle = (currentEndAngle) * Math.PI;
+		    
+		    currentStartAngle = currentEndAngle - 0.01;
+		    currentEndAngle = currentEndAngle + 0.01;
+		    
+		            
+		    var counterClockwise = false;
+
+		    context.beginPath();
+		    context.arc(x, y, lineRadius, startAngle, endAngle, counterClockwise);
+		    context.lineWidth = lineWidth;
+		    context.lineCap = "round";
+		    // line color
+		    context.strokeStyle = currentColor;
+		    // draw text
+		    context.clearRect(x * 0.5, y * 1.05 , x, y * 0.5);
+		    context.font = x / 5 + "px" + " Arial";
+		    var currentPercent = Math.round(currentEndAngle / 2 * 100);
+		    context.fillText(currentPercent + "%", x, y * 1.25);
+
+		    context.stroke();
+
+
+		    if (currentEndAngle > end) {
+		    	clearInterval(interval);
+		    }
+
+		}
+	}
+	
+
+    </script>
+</body>
+
+</html>

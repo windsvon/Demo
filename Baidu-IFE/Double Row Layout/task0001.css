@@ -1,0 +1,44 @@
+.left {
+	background-color: red;
+	width: 100px;
+	float:left;
+}
+
+.right {
+	background-color: blue;
+	margin-left: 100px;
+}
+
+
+.leftSecond {
+	background-color: red;
+	width:100px;
+	float:left;
+	margin-left: -100%;
+	position: relative;
+	left: -100px;
+}
+
+.rightSecond {
+	background-color: blue;
+	width:100%;
+	float:left;
+}
+
+#second {
+	padding-left:100px;
+}
+
+.leftThird {
+	display: inline-block;  /*利用inline-block实现双列布局，使用absolute的目的是使元素*/
+	width:100px;			/*A脱离文档流，否则元素B无法显示在第一行。*/
+	background-color: red;
+	position: absolute;
+}
+
+.rightThird {
+	display: inline-block;
+	width:100%;
+	background-color: blue;
+	margin-left:100px;
+}
